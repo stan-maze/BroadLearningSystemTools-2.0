@@ -195,6 +195,8 @@ class BLSClassifier(BLS):
         Input_EnhanceLayerWithBias = np.hstack([train_x_enhance, 0.1 * np.ones((train_x_enhance.shape[0], 1))])
         
         # 为什么使用LA.orth嵌套了一下增强节点的权重矩阵?
+        # 使用 SVD 为 A 的范围构造正交基, 希望W的权重是正交的,本身增强节点是应该使用FeatureMapping的
+        # 使用正交的可以使增强节点的区分度也加大吧
         self.W_EnhanceLayer = LA.orth(2 * random.randn(train_x_enhance.shape[1] + 1, self.EnhancementNodes)) - 1
 
         # 为什么用self.S?

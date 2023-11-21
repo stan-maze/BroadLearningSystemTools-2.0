@@ -30,6 +30,8 @@ class BLSAEExtractor(BLSAutoEncoder):
             # scaler1 = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit(Feature_EachWindow)                      # 对上述结果归一化处理
             # Feature_EachWindowAfterPreprocess = scaler1.transform(Feature_EachWindow)                               # 进行标准化
 
+# 跟BLSClassifier完全没区别, 这里使用的sparse AE本身就跟AE不一样,ELM里的AE和AE本身也不一样, ELM中AE的精髓就是随机X->隐层
+# sparse AE就是对这个随机映射矩阵做了消减(感觉跟AE也没多大关系)
             Feature_EachWindowAfterPreprocess = Feature_EachWindow  # 进行标准化
             Beta_EachWindow = self.sparse_bls(Feature_EachWindowAfterPreprocess, Feature_InputDataWithBias).T  # 随机化特征映射初始偏置
             self.Beta1_EachWindow.append(Beta_EachWindow)
